@@ -111,7 +111,7 @@ CampusSwap/
 - **Freemium**: Basic listings are free; featured listings cost €2-5
 - **Advertising**: Banner ads for local student-friendly businesses
 
-See [BUSINESS_CASE.md](BUSINESS_CASE.md) for detailed business information.
+See [BUSINESS_CASE.md](documents/BUSINESS_CASE.md) for detailed business information.
 
 ## Quick Navigation / Documentation
 
