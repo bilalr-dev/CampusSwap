@@ -19,21 +19,33 @@ struct ItemDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                // Image Header
-                headerImage
-                
-                VStack(alignment: .leading, spacing: 16) {
-                    // Title and Price
-                    VStack(alignment: .leading, spacing: 8) {
+            VStack(spacing: 0) {
+                // Hero Image
+                ZStack(alignment: .bottomLeading) {
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.1))
+                        .aspectRatio(1.2, contentMode: .fill)
+                        .overlay(
+                            Image(systemName: "photo")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(60)
+                                .foregroundColor(.gray.opacity(0.3))
+                        )
+                    
+                    // Gradient Overlay
+                    LinearGradient(colors: [.black.opacity(0.6), .clear], startPoint: .bottom, endPoint: .top)
+                        .frame(height: 120)
+                    
+                    // Title over Image
+                    VStack(alignment: .leading, spacing: 6) {
                         HStack {
                             Text(viewModel.listing.category.rawValue.uppercased())
                                 .font(.caption)
                                 .fontWeight(.bold)
-                                .foregroundColor(.secondary)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 4)
-                                .background(Color.gray.opacity(0.1))
+                                .background(Color.white.opacity(0.2))
                                 .cornerRadius(4)
                             
                             Spacer()
@@ -41,10 +53,11 @@ struct ItemDetailView: View {
                             if viewModel.listing.isFeatured {
                                 Label("Featured", systemImage: "star.fill")
                                     .font(.caption)
+                                    .fontWeight(.bold)
                                     .foregroundColor(.yellow)
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 4)
-                                    .background(Color.black.opacity(0.8))
+                                    .background(Color.black.opacity(0.6))
                                     .cornerRadius(4)
                             }
                         }
@@ -52,24 +65,41 @@ struct ItemDetailView: View {
                         Text(viewModel.listing.title)
                             .font(.title)
                             .fontWeight(.bold)
-                        
+                            .lineLimit(2)
+                            .shadow(radius: 2)
+                    }
+                    .foregroundColor(.white)
+                    .padding()
+                }
+                
+                VStack(alignment: .leading, spacing: 24) {
+                    // Price and Date Row
+                    HStack(alignment: .firstTextBaseline) {
                         Text(String(format: "€%.2f", viewModel.listing.price))
-                            .font(.title2)
-                            .fontWeight(.bold)
+                            .font(.system(size: 32, weight: .bold))
                             .foregroundColor(.blue)
+                        
+                        Spacer()
+                        
+                        Text("Posted \(viewModel.listing.createdAt, style: .date)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
                     }
                     
-                    Divider()
-                    
-                    // Seller Info
-                    HStack {
+                    // Seller Card
+                    HStack(spacing: 12) {
                         Circle()
-                            .fill(Color.gray.opacity(0.2))
-                            .frame(width: 40, height: 40)
-                            .overlay(Text(viewModel.listing.sellerName.prefix(1)).fontWeight(.bold))
+                            .fill(LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .frame(width: 50, height: 50)
+                            .overlay(
+                                Text(viewModel.listing.sellerName.prefix(1))
+                                    .font(.title2)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            )
                         
                         VStack(alignment: .leading) {
-                            Text("Posted by")
+                            Text("Sold by")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                             Text(viewModel.listing.sellerName)
@@ -78,12 +108,12 @@ struct ItemDetailView: View {
                         
                         Spacer()
                         
-                        Text(viewModel.listing.createdAt, style: .date)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.gray)
                     }
-                    
-                    Divider()
+                    .padding()
+                    .background(Color.gray.opacity(0.05))
+                    .cornerRadius(12)
                     
                     // Description
                     VStack(alignment: .leading, spacing: 8) {
@@ -92,11 +122,18 @@ struct ItemDetailView: View {
                         Text(viewModel.listing.description)
                             .font(.body)
                             .foregroundColor(.secondary)
+                            .lineSpacing(4)
                     }
-                    
-                    Spacer(minLength: 40)
-                    
-                    // Actions
+                }
+                .padding(24)
+            }
+        }
+        .edgesIgnoringSafeArea(.top)
+        .safeAreaInset(edge: .bottom) {
+            // Floating Action Bar
+            VStack {
+                Divider()
+                HStack {
                     if viewModel.isCurrentUserSeller {
                         ownerActions
                     } else {
@@ -104,6 +141,7 @@ struct ItemDetailView: View {
                     }
                 }
                 .padding()
+                .background(Color(.systemBackground))
             }
         }
         .navigationBarTitleDisplayMode(.inline)

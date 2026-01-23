@@ -153,61 +153,74 @@ struct ListingRow: View {
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             // Image Placeholder
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color.gray.opacity(0.2))
-                .frame(width: 100, height: 100)
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color.gray.opacity(0.1))
+                .frame(width: 110, height: 110)
                 .overlay(
                     Image(systemName: "photo")
-                        .foregroundColor(.gray)
+                        .font(.title2)
+                        .foregroundColor(.gray.opacity(0.5))
+                )
+                .overlay(
+                    Group {
+                        if listing.isFeatured {
+                            VStack {
+                                Spacer()
+                                HStack {
+                                    Image(systemName: "star.fill")
+                                        .font(.caption2)
+                                        .foregroundColor(.white)
+                                    Text("FEATURED")
+                                        .font(.caption2)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                }
+                                .padding(.vertical, 4)
+                                .padding(.horizontal, 8)
+                                .background(LinearGradient(colors: [.orange, .yellow], startPoint: .leading, endPoint: .trailing))
+                                .cornerRadius(8)
+                                .padding(4)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .bottomLeading)
+                        }
+                    }
                 )
             
             VStack(alignment: .leading, spacing: 6) {
-                HStack {
-                    if listing.isFeatured {
-                        Text("FEATURED")
-                            .font(.system(size: 10, weight: .bold))
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(Color.yellow)
-                            .foregroundColor(.black)
-                            .cornerRadius(4)
-                    }
+                Text(listing.title)
+                    .font(.headline)
+                    .lineLimit(2)
+                    .foregroundColor(.primary)
+                
+                Text(listing.category.rawValue)
+                    .font(.caption)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.blue.opacity(0.1))
+                    .foregroundColor(.blue)
+                    .cornerRadius(8)
+                
+                Spacer()
+                
+                HStack(alignment: .bottom) {
+                    Text(String(format: "€%.2f", listing.price))
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                    
                     Spacer()
+                    
                     Text(listing.createdAt, style: .date)
                         .font(.caption2)
                         .foregroundColor(.secondary)
                 }
-                
-                Text(listing.title)
-                    .font(.headline)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.primary)
-                
-                Text(String(format: "€%.2f", listing.price))
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .foregroundColor(.blue)
-                
-                Spacer()
-                
-                HStack {
-                    Image(systemName: "tag.fill")
-                        .font(.caption2)
-                    Text(listing.category.rawValue)
-                        .font(.caption)
-                    Spacer()
-                    Text(listing.sellerName)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                .foregroundColor(.secondary)
             }
+            .padding(.vertical, 4)
         }
         .padding(12)
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+        .cornerRadius(16)
+        .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
     }
 }
 
@@ -234,35 +247,47 @@ struct ListingCard: View {
                         .font(.title2)
                         .padding(8)
                         .shadow(radius: 2)
+                        .background(
+                            Circle()
+                                .fill(Color.black.opacity(0.2))
+                                .blur(radius: 4)
+                        )
                 }
             }
             
             // Content
             VStack(alignment: .leading, spacing: 8) {
-                VStack(alignment: .leading, spacing: 4) {
+                HStack {
                     Text(listing.category.rawValue.uppercased())
                         .font(.caption2)
                         .fontWeight(.bold)
                         .foregroundColor(.secondary)
-                    
-                    Text(listing.title)
-                        .font(.subheadline)
-                        .fontWeight(.medium)
-                        .lineLimit(2)
-                        .multilineTextAlignment(.leading)
-                        .frame(height: 40, alignment: .topLeading)
-                        .foregroundColor(.primary)
+                    Spacer()
+                    Text(listing.createdAt, style: .time)
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
                 }
                 
-                Text(String(format: "€%.2f", listing.price))
-                    .font(.headline)
-                    .foregroundColor(.blue)
+                Text(listing.title)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                    .frame(height: 40, alignment: .topLeading)
+                    .foregroundColor(.primary)
+                
+                HStack {
+                    Text(String(format: "€%.2f", listing.price))
+                        .font(.headline)
+                        .foregroundColor(.blue)
+                    Spacer()
+                }
             }
             .padding(12)
         }
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+        .cornerRadius(16)
+        .shadow(color: Color.black.opacity(0.08), radius: 8, x: 0, y: 4)
     }
 }
 
@@ -278,13 +303,18 @@ struct CategoryPill: View {
                 .fontWeight(.medium)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
-                .background(isSelected ? Color.blue : Color(.systemBackground))
+                .background(
+                    ZStack {
+                        if isSelected {
+                            LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        } else {
+                            Color(.systemBackground)
+                        }
+                    }
+                )
                 .foregroundColor(isSelected ? .white : .primary)
                 .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.gray.opacity(0.2), lineWidth: isSelected ? 0 : 1)
-                )
+                .shadow(color: isSelected ? Color.blue.opacity(0.3) : Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
         }
     }
 }
