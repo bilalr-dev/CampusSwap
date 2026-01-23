@@ -76,7 +76,7 @@ struct FeedView: View {
             if isGridView {
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(viewModel.filteredListings) { listing in
-                        NavigationLink(destination: ItemDetailViewPlaceholder(listing: listing)) {
+                        NavigationLink(destination: ItemDetailView(listing: listing)) {
                             ListingCard(listing: listing)
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -86,7 +86,7 @@ struct FeedView: View {
             } else {
                 LazyVStack(spacing: 12) {
                     ForEach(viewModel.filteredListings) { listing in
-                        NavigationLink(destination: ItemDetailViewPlaceholder(listing: listing)) {
+                        NavigationLink(destination: ItemDetailView(listing: listing)) {
                             ListingRow(listing: listing)
                         }
                         .buttonStyle(PlainButtonStyle())
