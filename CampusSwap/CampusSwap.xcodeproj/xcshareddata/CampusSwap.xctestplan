@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "BA905A32-9C12-4028-9477-885744955745",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:CampusSwap.xcodeproj",
+        "identifier" : "CampusSwapTests",
+        "name" : "CampusSwapTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:CampusSwap.xcodeproj",
+        "identifier" : "CampusSwapUITests",
+        "name" : "CampusSwapUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
