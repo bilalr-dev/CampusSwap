@@ -159,8 +159,14 @@ struct ProfileSetupView: View {
         }
         
         let userProfile = UserProfile(name: name, contact: contact, listings: [])
-        UserService.shared.saveUser(userProfile)
-        onComplete()
+        
+        do {
+            try UserService.shared.saveUser(userProfile)
+            onComplete()
+        } catch {
+            errorMessage = "Failed to save profile: \(error.localizedDescription)"
+            showingError = true
+        }
     }
 }
 
