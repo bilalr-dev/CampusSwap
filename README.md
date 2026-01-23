@@ -113,12 +113,12 @@ CampusSwap/
 
 See [BUSINESS_CASE.md](BUSINESS_CASE.md) for detailed business information.
 
-## Documentation
+## Quick Navigation / Documentation
 
-- **[BUSINESS_CASE.md](BUSINESS_CASE.md)**: Complete business case and monetization strategy
-- **[TECHNICAL_ARCHITECTURE.md](TECHNICAL_ARCHITECTURE.md)**: Technical architecture, diagrams, and system design
-- **[FEATURES.md](FEATURES.md)**: Detailed feature specifications
-- **[PROJECT_PLAN.md](PROJECT_PLAN.md)**: Development plan and timeline
+- **[Business Case](documents/BUSINESS_CASE.md)**: Monetization strategy and market analysis
+- **[Technical Architecture](documents/TECHNICAL_ARCHITECTURE.md)**: System design and diagrams
+- **[Feature Specifications](documents/FEATURES.md)**: Detailed feature breakdown
+- **[Project Plan](documents/PROJECT_PLAN.md)**: Development timeline and milestones
 
 ## Team
 
