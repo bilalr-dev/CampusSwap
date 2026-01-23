@@ -16,7 +16,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set Default Scheme
-        # This 'working-directory' is key because your project is in a subfolder
         working-directory: ./CampusSwap
         run: |
           # 1. Generate the list of schemes
