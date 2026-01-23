@@ -13,6 +13,7 @@ struct Listing: Identifiable, Codable {
     var description: String
     var price: Double
     var category: ItemCategory
+    var sellerId: UUID
     var sellerName: String
     var sellerContact: String
     var isFeatured: Bool
@@ -25,6 +26,7 @@ struct Listing: Identifiable, Codable {
         description: String,
         price: Double,
         category: ItemCategory,
+        sellerId: UUID,
         sellerName: String,
         sellerContact: String,
         isFeatured: Bool = false,
@@ -36,6 +38,7 @@ struct Listing: Identifiable, Codable {
         self.description = description
         self.price = price
         self.category = category
+        self.sellerId = sellerId
         self.sellerName = sellerName
         self.sellerContact = sellerContact
         self.isFeatured = isFeatured
