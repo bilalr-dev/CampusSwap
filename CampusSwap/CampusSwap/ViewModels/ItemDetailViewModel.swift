@@ -35,7 +35,7 @@ class ItemDetailViewModel: ObservableObject {
     
     // MARK: - Public Methods
     func checkIfCurrentUser() {
-        self.isCurrentUserSeller = userService.isCurrentUser(sellerName: listing.sellerName)
+        self.isCurrentUserSeller = userService.isCurrentUser(sellerId: listing.sellerId)
     }
     
     // Refresh listing data (e.g. if featured status changed)

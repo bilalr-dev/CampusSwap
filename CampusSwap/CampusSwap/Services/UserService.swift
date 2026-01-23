@@ -11,7 +11,7 @@ import Combine
 protocol UserServiceProtocol {
     func getCurrentUser() -> UserProfile?
     func saveUser(_ user: UserProfile) throws
-    func isCurrentUser(sellerName: String) -> Bool
+    func isCurrentUser(sellerId: UUID) -> Bool
     func clearUser()
 }
 
@@ -61,11 +61,11 @@ class UserService: ObservableObject, UserServiceProtocol {
         }
     }
     
-    func isCurrentUser(sellerName: String) -> Bool {
+    func isCurrentUser(sellerId: UUID) -> Bool {
         guard let currentUser = currentUser else {
             return false
         }
-        return currentUser.name == sellerName
+        return currentUser.id == sellerId
     }
     
     func clearUser() {
@@ -73,3 +73,5 @@ class UserService: ObservableObject, UserServiceProtocol {
         self.currentUser = nil
     }
 }
+
+

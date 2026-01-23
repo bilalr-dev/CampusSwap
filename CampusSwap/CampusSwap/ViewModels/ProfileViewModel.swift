@@ -53,6 +53,7 @@ class ProfileViewModel: ObservableObject {
             description: description,
             price: price,
             category: category,
+            sellerId: user.id,
             sellerName: user.name,
             sellerContact: user.contact
         )
@@ -77,8 +78,7 @@ class ProfileViewModel: ObservableObject {
         }
         
         // Filter listings where seller matches current user
-        // Note: For MVP we rely on name matching. In production, use User ID.
-        self.userListings = allListings.filter { $0.sellerName == user.name }
+        self.userListings = allListings.filter { $0.sellerId == user.id }
             .sorted { $0.createdAt > $1.createdAt }
     }
     
