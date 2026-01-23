@@ -11,6 +11,7 @@ struct ItemDetailView: View {
     @StateObject private var viewModel: ItemDetailViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var showingDeleteAlert = false
+    @State private var showingFeatureSheet = false
     
     init(listing: Listing) {
         _viewModel = StateObject(wrappedValue: ItemDetailViewModel(listing: listing))
@@ -123,6 +124,9 @@ struct ItemDetailView: View {
         } message: {
             Text("Are you sure you want to delete this listing? This action cannot be undone.")
         }
+        .sheet(isPresented: $showingFeatureSheet, onDismiss: { viewModel.refreshListing() }) {
+            FeaturedListingView(listing: viewModel.listing)
+        }
     }
     
     private var headerImage: some View {
@@ -154,9 +158,9 @@ struct ItemDetailView: View {
     
     private var ownerActions: some View {
         VStack(spacing: 12) {
-            // Feature Button (Placeholder for now)
+            // Feature Button
             if !viewModel.listing.isFeatured {
-                Button(action: { /* Navigate to Feature Mock */ }) {
+                Button(action: { showingFeatureSheet = true }) {
                     Label("Feature This Listing", systemImage: "star.fill")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
