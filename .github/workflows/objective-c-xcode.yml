@@ -1,4 +1,4 @@
-name: Xcode - Build and Analyze
+name: Xcode - Unit Tests
 
 on:
   push:
@@ -7,24 +7,44 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-    name: Build and analyse default scheme using xcodebuild command
+  test:
+    name: Run Unit Tests
     runs-on: macos-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set Default Scheme
+        # This 'working-directory' is key because your project is in a subfolder
+        working-directory: ./CampusSwap
         run: |
+          # 1. Generate the list of schemes
           scheme_list=$(xcodebuild -list -json | tr -d "\n")
-          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
-          echo $default | cat >default
-          echo Using default scheme: $default
-      - name: Build
-        env:
-          scheme: ${{ 'default' }}
+          
+          # 2. Extract the first shared scheme using Ruby
+          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['schemes'][0]")
+          
+          # 3. Save the scheme name to the environment for the next step
+          echo "SCHEME=$default" >> $GITHUB_ENV
+          echo "Using scheme: $default"
+
+      - name: Run Tests
+        working-directory: ./CampusSwap
         run: |
-          if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
-          file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
+          # 1. Determine if we are using a workspace or a project
+          if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then 
+            filetype_parameter="workspace"
+            file_to_build="`ls -A | grep -i \\.xcworkspace\$`"
+          else 
+            filetype_parameter="project"
+            file_to_build="`ls -A | grep -i \\.xcodeproj\$`"
+          fi
+
+          # 2. Execute the test suite
+          # Note: We specify iPhone 15 to ensure the simulator boots correctly
+          xcodebuild test \
+            -scheme "${{ env.SCHEME }}" \
+            -"$filetype_parameter" "$file_to_build" \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+            | xcpretty && exit ${PIPESTATUS[0]}
