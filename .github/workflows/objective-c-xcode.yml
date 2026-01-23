@@ -16,7 +16,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set Default Scheme
-        # This 'working-directory' is key because your project is in a subfolder
         working-directory: ./CampusSwap
         run: |
           # 1. Generate the list of schemes
@@ -29,7 +28,7 @@ jobs:
           echo "SCHEME=$default" >> $GITHUB_ENV
           echo "Using scheme: $default"
 
-      - name: Run Tests
+      - name: Build App
         working-directory: ./CampusSwap
         run: |
           # 1. Determine if we are using a workspace or a project
@@ -41,9 +40,8 @@ jobs:
             file_to_build="`ls -A | grep -i \\.xcodeproj\$`"
           fi
 
-          # 2. Execute the test suite
-          # Note: We specify iPhone 16 to ensure the simulator boots correctly
-          xcodebuild test \
+          # 2. Build the app (Tests skipped as targets do not exist yet)
+          xcodebuild build \
             -scheme "${{ env.SCHEME }}" \
             -"$filetype_parameter" "$file_to_build" \
             -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
