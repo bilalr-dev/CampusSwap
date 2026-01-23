@@ -21,7 +21,6 @@ struct ProfileSetupView: View {
     }
     
     var body: some View {
-    var body: some View {
         ZStack {
             // Animated Background Gradient
             LinearGradient(
