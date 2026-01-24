@@ -135,5 +135,5 @@ struct BenefitRow: View {
 }
 
 #Preview {
-    FeaturedListingView(listing: Listing(id: UUID(), title: "Sample Item", description: "", price: 10, category: .textbook, sellerName: "", sellerContact: "", createdAt: Date()))
+    FeaturedListingView(listing: Listing(id: UUID(), title: "Sample Item", description: "", price: 10, category: .textbook, sellerId: UUID(), sellerName: "", sellerContact: "", createdAt: Date()))
 }
