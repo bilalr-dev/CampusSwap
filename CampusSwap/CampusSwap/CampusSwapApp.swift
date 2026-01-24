@@ -17,21 +17,19 @@ struct CampusSwapApp: App {
 }
 
 struct AppRootView: View {
-    @State private var hasUserProfile = false
+    @ObservedObject private var userService = UserService.shared
     
     var body: some View {
         Group {
-            if hasUserProfile {
+            if userService.currentUser != nil {
                 ContentView()
             } else {
                 ProfileSetupView {
-                    hasUserProfile = true
+                    // Logic is handled by UserService updates, but callback 
+                    // is still needed if ProfileSetupView requires it.
+                    // Ideally ProfileSetupView should just save and we react to the change.
                 }
             }
-        }
-        .onAppear {
-            // Check if user profile exists
-            hasUserProfile = UserService.shared.getCurrentUser() != nil
         }
     }
 }
