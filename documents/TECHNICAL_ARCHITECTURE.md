@@ -685,5 +685,5 @@ Legend: Implemented | Placeholder | Planned
 ---
 
 **Document Version**: 1.0  
-**Last Updated**: January 2025  
+**Last Updated**: January 2026  
 **Team**: CampusSwap Development Group
