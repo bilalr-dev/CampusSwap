@@ -11,7 +11,21 @@ import SwiftUI
 struct CampusSwapApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppRootView()
+        }
+    }
+}
+
+struct AppRootView: View {
+    @ObservedObject private var userService = UserService.shared
+    
+    var body: some View {
+        Group {
+            if userService.currentUser != nil {
+                ContentView()
+            } else {
+                ProfileSetupView()
+            }
         }
     }
 }
