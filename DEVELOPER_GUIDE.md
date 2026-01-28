@@ -59,7 +59,13 @@ This is the most important step. You need Bilal's Models and Services to work.
 git fetch origin
 git merge origin/feature/bilal-work
 ```
-*Auto-merge should work seamlessly as you are merging code into empty stubs.*
+
+### Step 4: Verify Setup 🔍
+1.  Open `CampusSwap.xcodeproj` in Xcode.
+2.  Open `Models/Listing.swift`.
+3.  **Correct**: You see `struct Listing: Identifiable, Codable ...` with full properties.
+4.  **Incorrect**: You see `// TODO: Implement Listing` or just `struct Listing {}`.
+    *   *Fix*: Run the merge command in Step 3 again.
 
 ---
 
@@ -71,43 +77,28 @@ git merge origin/feature/bilal-work
 *   **ViewModels**: `ObservableObject` classes that hold state for Views.
 *   **Views**: SwiftUI views that observe ViewModels.
 
-### Data Flow
-1.  **Views** read data from **ViewModels**.
-2.  **ViewModels** fetch/save data via **Services**.
-3.  **Services** persist data to `listings.json` or `UserDefaults`.
-
 ---
 
-## 📋 4. Developer Specifications & ownership
+## 📋 4. Developer Specifications & Ownership
 
-To avoid conflicts, stick to your assigned files.
+To avoid conflicts, **ONLY EDIT FILES YOU OWN**.
 
 ### 👨‍💻 Bilal (Data Layer)
-*   **Files**: `Models/*`, `Services/*`
-*   **Responsibility**: Core logic, persistence, `AppRootView` logic.
+*   **Owning**: `Models/*`, `Services/*`, `CampusSwapApp.swift` (Root Logic).
+*   **Responsibility**: Core infrastructure, data persistence.
 
 ### 👨‍💻 Aakash (Feed & Discovery)
-*   **Files**: 
-    *   `Views/FeedView.swift`
-    *   `Views/FeaturedListingView.swift` (shared)
-    *   `ViewModels/FeedViewModel.swift`
-*   **Responsibility**: Main feed UI, Search bar, Filtering logic, Grid/List toggle.
+*   **Owning**: `ViewModels/FeedViewModel.swift`, `Views/FeedView.swift`.
+*   **Shared**: `Views/FeaturedListingView.swift`.
+*   **Responsibility**: Search, Filters, Grid/List Toggle.
 
 ### 👨‍💻 Mouhamad (Profile & Items)
-*   **Files**: 
-    *   `Views/ProfileSetupView.swift`
-    *   `Views/ProfileView.swift`
-    *   `Views/ItemDetailView.swift`
-    *   `Views/CreateListingView.swift`
-    *   `ViewModels/ProfileViewModel.swift`
-    *   `ViewModels/ItemDetailViewModel.swift`
-*   **Responsibility**: User onboarding, Item details screen, Profile management, "My Listings".
+*   **Owning**: `ViewModels/ProfileViewModel.swift`, `ViewModels/ItemDetailViewModel.swift`, `Views/Profile*.swift`, `Views/ItemDetailView.swift`, `Views/CreateListingView.swift`.
+*   **Responsibility**: Authentication flows, CRUD operations, User Profile.
 
 ### 👨‍💻 Helijao (Premium & Polish)
-*   **Files**: 
-    *   `Views/FeaturedListingView.swift` (Premium logic)
-    *   Global UI styling (`Utilities/Extensions.swift`)
-*   **Responsibility**: Premium purchase flow, Ads, UI Polish, Animations, Empty States.
+*   **Owning**: `Utilities/Extensions.swift`, `Views/FeaturedListingView.swift` (Premium logic).
+*   **Responsibility**: UI Styling, Animations, Premium purchase flow.
 
 ---
 
@@ -115,24 +106,15 @@ To avoid conflicts, stick to your assigned files.
 
 **DO NOT MERGE INTO MAIN UNTIL APPROVED.**
 
-Our integration order is strict:
-
 1.  **Phase 1**: Bilal merges `feature/bilal-work` -> `main`. (Establishes the foundation).
-2.  **Phase 2**: You pull the updated `main` into your feature branch:
-    ```bash
-    git pull origin main
-    ```
-    (This ensures compatibility).
+2.  **Phase 2**: You pull the updated `main` into your feature branch: `git pull origin main`.
 3.  **Phase 3**: You merge your feature branch -> `main`.
 
 ---
 
-## 🆘 Troubleshooting
+## 🚫 Do's and Don'ts
 
-**"I have compilation errors about missing types!"**
--> You likely forgot Step 3 (Merge Bilal's work). Run `git merge origin/feature/bilal-work`.
-
-**"I have merge conflicts!"**
--> Contact Bilal or the team lead immediately. Do not force push.
-
-Happy Coding! 🚀
+*   **DO** commit often.
+*   **DO** pull `origin/feature/bilal-work` if Bilal updates models.
+*   **DON'T** rename files (the scaffold relies on fixed names).
+*   **DON'T** edit `CampusSwap.xcodeproj` settings unless necessary.
