@@ -79,25 +79,8 @@ struct FeedView: View {
                     VStack(spacing: 20) {
                         // Featured Section
                         if !viewModel.featuredListings.isEmpty {
-                            VStack(alignment: .leading) {
-                                Text("Featured")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                    .padding(.horizontal)
-                                
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 16) {
-                                        ForEach(viewModel.featuredListings) { listing in
-                                            NavigationLink(destination: ItemDetailView()) {
-                                                FeaturedListingView(listing: listing)
-                                            }
-                                            .buttonStyle(PlainButtonStyle())
-                                        }
-                                    }
-                                    .padding(.horizontal)
-                                }
-                            }
-                            .padding(.top, 8)
+                            FeaturedListingView()
+                                .padding(.top, 8)
                         }
                         
                         // Recent Listings Section
