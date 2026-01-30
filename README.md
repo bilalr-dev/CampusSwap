@@ -36,9 +36,10 @@ Everything you need to get started or dive deep into the project architecture.
 
 ## 👥 Team Members
 
-*   **Bilal Rahaoui** - Lead Developer & Data Layer Architect
-
-*(Add other team members here)*
+*   **Bilal Rahaoui** - Lead Developer & Data Layer
+*   **Aakash** - Main Feed & Discovery
+*   **Mouhamad** - Item Details & Profile Management
+*   **Helijao** - Premium Features & UI UX
 
 ---
 
