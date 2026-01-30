@@ -30,7 +30,7 @@ struct FeaturedListingView: View {
                 HStack(spacing: 16) {
                     // List of featured items
                     ForEach(featuredListings) { listing in
-                        NavigationLink(destination: ItemDetailView()) {
+                        NavigationLink(destination: ItemDetailView(listingId: listing.id)) {
                             FeaturedCard(listing: listing)
                         }
                         .buttonStyle(PlainButtonStyle())

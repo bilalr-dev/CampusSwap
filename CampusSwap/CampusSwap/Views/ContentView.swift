@@ -1,15 +1,18 @@
-//
-//  ContentView.swift
-//  CampusSwap
-//
-//  Created by CampusSwap Team
-//
-
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("ContentView")
+        TabView {
+            FeedView()
+                .tabItem {
+                    Label("Feed", systemImage: "house.fill")
+                }
+            
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.fill")
+                }
+        }
     }
 }
 

@@ -14,8 +14,8 @@ class FeedViewModel: ObservableObject {
     @Published var selectedCategory: ItemCategory? = nil
     @Published var isGridView: Bool = false
     
-    // Private storage for all listings
-    @Published private var allListings: [Listing] = []
+    // Storage for all listings
+    @Published var allListings: [Listing] = []
     
     // Dependencies
     private let listingService: ListingServiceProtocol
