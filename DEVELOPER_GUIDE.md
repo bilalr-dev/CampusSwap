@@ -12,7 +12,7 @@ This document serves as the single source of truth for Project Structure, Archit
 The `main` branch contains the full folder structure and all Swift files, but **the implementation code is missing (stubbed)**.
 
 *   You CANNOT build the app from `main` alone.
-*   You MUST merge the **Data Layer** (Bilal's work) to make the app functional.
+*   You MUST merge the **Data Layer** (Bilal's work, `feature/data-service`) to make the app functional.
 
 ### Why?
 This ensures we all start with identical file paths and class names (avoiding merge conflicts on file creation) while allowing the Data Layer to be built independently.
@@ -57,7 +57,7 @@ git checkout -b feature/premium-features
 This is the most important step. You need Bilal's Models and Services to work.
 ```bash
 git fetch origin
-git merge origin/feature/bilal-work
+git merge origin/feature/data-service
 ```
 
 ### Step 4: Verify Setup 🔍
@@ -106,7 +106,7 @@ To avoid conflicts, **ONLY EDIT FILES YOU OWN**.
 
 **DO NOT MERGE INTO MAIN UNTIL APPROVED.**
 
-1.  **Phase 1**: Bilal merges `feature/bilal-work` -> `main`. (Establishes the foundation).
+1.  **Phase 1**: Bilal merges `feature/data-service` -> `main`. (Establishes the foundation).
 2.  **Phase 2**: You pull the updated `main` into your feature branch: `git pull origin main`.
 3.  **Phase 3**: You merge your feature branch -> `main`.
 
@@ -115,6 +115,6 @@ To avoid conflicts, **ONLY EDIT FILES YOU OWN**.
 ## 🚫 Do's and Don'ts
 
 *   **DO** commit often.
-*   **DO** pull `origin/feature/bilal-work` if Bilal updates models.
+*   **DO** pull `origin/feature/data-service` if Bilal updates models.
 *   **DON'T** rename files (the scaffold relies on fixed names).
 *   **DON'T** edit `CampusSwap.xcodeproj` settings unless necessary.
