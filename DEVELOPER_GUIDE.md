@@ -13,10 +13,6 @@ The `main` branch contains the fully integrated application, including the Data 
 
 *   **Always** create your feature branches from `main`.
 *   **Never** push directly to `main`. Use Pull Requests.
-*   You MUST merge the **Data Layer** (Bilal's work, `feature/data-service`) to make the app functional.
-
-### Why?
-This ensures we all start with identical file paths and class names (avoiding merge conflicts on file creation) while allowing the Data Layer to be built independently.
 
 ### Directory Structure
 ```
