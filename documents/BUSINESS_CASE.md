@@ -291,5 +291,5 @@ CampusSwap addresses a real, recurring problem faced by university students whil
 ---
 
 **Document Version**: 1.0  
-**Last Updated**: January 2025  
+**Last Updated**: January 2026  
 **Team**: CampusSwap Development Group
