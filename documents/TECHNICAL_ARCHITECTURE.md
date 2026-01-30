@@ -565,22 +565,31 @@ ProfileView UI refreshes automatically
 
 ```
 CampusSwap/CampusSwap/
-├── CampusSwapApp.swift          App entry point with profile check
+├── CampusSwapApp.swift          App entry point (AppRootView, WelcomeView integration)
 ├── Models/
 │   ├── Listing.swift            Listing data model
 │   ├── UserProfile.swift        User data model
 │   └── ItemCategory.swift       Category enumeration
 ├── Views/
-│   ├── ProfileSetupView.swift   First-time user setup (Screen 0)
+│   ├── Authentication/
+│   │   ├── WelcomeView.swift    Entry screen (Login/Signup)
+│   │   └── LoginView.swift      Mock login screen
+│   ├── ProfileSetupView.swift   First-time user setup
 │   ├── ContentView.swift        Main tab container
-│   ├── FeedView.swift           Browse listings (Screen 1 - placeholder)
-│   └── ProfileView.swift        User's listings (Screen 3 - placeholder)
+│   ├── FeedView.swift           Browse listings & Search
+│   ├── ProfileView.swift        User profile & My Listings
+│   ├── ItemDetailView.swift     Item details & Contact
+│   ├── CreateListingView.swift  Create listing form
+│   ├── EditListingView.swift    Edit listing form
+│   ├── FeatureListingView.swift Feature purchase modal
+│   └── Components/              (Various UI components)
 ├── ViewModels/
-│   ├── FeedViewModel.swift      Feed screen logic (placeholder)
-│   └── ProfileViewModel.swift   Profile screen logic (placeholder)
+│   ├── FeedViewModel.swift      Feed logic & Filtering
+│   ├── ProfileViewModel.swift   Profile logic & CRUD
+│   └── ItemDetailViewModel.swift Item detail logic
 ├── Services/
 │   ├── ListingService.swift     Listing CRUD operations
-│   ├── UserService.swift        User profile management
+│   ├── UserService.swift        User profile & Auth management
 │   ├── FeaturedService.swift    Featured listing tracking
 │   └── SampleData.swift         Sample data generator
 ├── Utilities/
@@ -588,27 +597,7 @@ CampusSwap/CampusSwap/
 └── Assets.xcassets/
     └── Logo.imageset/           App logo
 
-Legend: Implemented | Placeholder | Planned
-```
-
-### Planned Files (To Be Implemented)
-
-```
-├── Views/
-│   ├── ItemDetailView.swift         Item details screen (Screen 2)
-│   ├── CreateListingView.swift      Create listing form
-│   ├── EditListingView.swift        Edit listing form
-│   ├── FeatureListingView.swift    Feature purchase modal
-│   └── Components/
-│       ├── SearchBar.swift          Search component
-│       ├── FeaturedBadge.swift      Featured badge component
-│       ├── CategoryBadge.swift      Category badge component
-│       ├── ListView.swift           List view component
-│       ├── GridView.swift           Grid view component
-│       ├── EmptyStateView.swift     Empty state component
-│       └── EmptyProfileView.swift   Empty profile component
-└── ViewModels/
-    └── ItemDetailViewModel.swift    Item details logic
+Legend: Implemented
 ```
 
 ---

@@ -8,10 +8,11 @@ This document serves as the single source of truth for Project Structure, Archit
 ## 🏗️ 1. Project Structure & The "Golden Rule"
 
 ### The Golden Rule
-**`main` is a SCAFFOLD.**
-The `main` branch contains the full folder structure and all Swift files, but **the implementation code is missing (stubbed)**.
+**`main` is the SOURCE OF TRUTH.**
+The `main` branch contains the fully integrated application, including the Data Layer, Authentication, and core features.
 
-*   You CANNOT build the app from `main` alone.
+*   **Always** create your feature branches from `main`.
+*   **Never** push directly to `main`. Use Pull Requests.
 *   You MUST merge the **Data Layer** (Bilal's work, `feature/data-service`) to make the app functional.
 
 ### Why?
@@ -41,31 +42,19 @@ cd CampusSwap
 ```
 
 ### Step 2: Create Your Feature Branch
-Create a branch for your assigned feature:
+Create a branch for your assigned feature from `main`:
 ```bash
-# Aakash
-git checkout -b feature/feed-screen
-
-# Mouhamad
-git checkout -b feature/profile-screen
-
-# Helijao
-git checkout -b feature/premium-features
+# Example
+git checkout main
+git pull origin main
+git checkout -b feature/your-feature-name
 ```
 
-### Step 3: ⚠️ INTEGRATE THE DATA LAYER ⚠️
-This is the most important step. You need Bilal's Models and Services to work.
-```bash
-git fetch origin
-git merge origin/feature/data-service
-```
-
-### Step 4: Verify Setup 🔍
+### Step 3: Verify Setup 🔍
 1.  Open `CampusSwap.xcodeproj` in Xcode.
-2.  Open `Models/Listing.swift`.
-3.  **Correct**: You see `struct Listing: Identifiable, Codable ...` with full properties.
-4.  **Incorrect**: You see `// TODO: Implement Listing` or just `struct Listing {}`.
-    *   *Fix*: Run the merge command in Step 3 again.
+2.  Press `Cmd+R` to build and run the app.
+3.  **Success**: You should see the **Welcome Screen** ("Log In" / "Sign Up").
+
 
 ---
 

@@ -4,19 +4,19 @@
 
 ## Quick Start Checklist
 
-1.  **Clone**: `git clone https://github.com/bilalr-dev/CampusSwap.git`
-2.  **Branch**: `git checkout -b feature/your-feature-name`
-3.  **Integrate Core**: `git merge origin/feature/data-service` (Crucial!)
-4.  **Verify**: Check that `Listing.swift` is not empty.
+1.  **Clone**: `git clone https://github.com/bilalrahaoui/CampusSwap.git`
+2.  **Pull**: `git checkout main && git pull`
+3.  **Branch**: `git checkout -b feature/your-feature-name`
+4.  **Verify**: Build the app (Cmd+R) to ensure it runs green.
 
 ## Branching Strategy
 
-*   `main`: **Scaffold** (Stubs only). Do not push here directly.
-*   `feature/data-service`: **Data Layer Source** (was `feature/bilal-work`).
-*   `feature/*`: Your working branches.
+*   `main`: **Production Ready**. Contains all verifiable features and the Core Data Layer.
+*   `feature/*`: Your working branches. Merge back to `main` via Pull Request (PR).
 
 ## Merging back to Main (End Game)
 
-1.  Bilal merges `feature/data-service` into `main`.
-2.  Feature Leads (Aakash, Mouhamad, Helijao) pull `main` to get the latest code.
-3.  Feature Leads merge their finished features into `main`.
+1.  Push your feature branch: `git push origin feature/your-feature-name`
+2.  Open a Pull Request (PR) on GitHub.
+3.  Request review from Bilal or another lead.
+4.  Once approved, merge into `main`.
