@@ -24,7 +24,7 @@ struct AppRootView: View {
             if userService.currentUser != nil {
                 ContentView()
             } else {
-                ProfileSetupView()
+                WelcomeView()
             }
         }
     }

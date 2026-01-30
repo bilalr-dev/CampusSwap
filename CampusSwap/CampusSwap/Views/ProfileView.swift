@@ -113,6 +113,16 @@ struct ProfileView: View {
             }
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        viewModel.logout()
+                    }) {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .foregroundColor(.red)
+                    }
+                }
+            }
             .sheet(isPresented: $showingCreateListing) {
                 CreateListingView()
             }

@@ -128,4 +128,8 @@ class ProfileViewModel: ObservableObject {
             }
         }
     }
+    
+    func logout() {
+        userService.clearUser()
+    }
 }

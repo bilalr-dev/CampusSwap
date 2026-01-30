@@ -68,6 +68,28 @@ class UserService: ObservableObject, UserServiceProtocol {
         return currentUser.id == sellerId
     }
     
+    func login(email: String) {
+        // Mock login - in a real app, verify password with backend
+        // For now, check if a user with this email exists in UserDefaults or create a dummy one
+        // Ideally, we search our "database" (array of users), but here we just simulate success
+        // by setting a current user with this email.
+        
+        let user = UserProfile(
+            name: "Campus User", // Placeholder name
+            contact: email,
+            listings: []
+        )
+        
+        // Simulating a successful login/fetch
+        self.currentUser = user
+        
+        do {
+            try saveUser(user)
+        } catch {
+            print("Login error: \(error.localizedDescription)")
+        }
+    }
+    
     func clearUser() {
         userDefaults.removeObject(forKey: userDefaultsKey)
         self.currentUser = nil
